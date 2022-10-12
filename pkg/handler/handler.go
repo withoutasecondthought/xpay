@@ -6,10 +6,10 @@ import (
 )
 
 type Handler struct {
-	services service.Service
+	services *service.Service
 }
 
-func NewHandler(s service.Service) *Handler {
+func NewHandler(s *service.Service) *Handler {
 	return &Handler{
 		services: s,
 	}
@@ -33,4 +33,6 @@ func (h *Handler) InitRoutes() *gin.Engine {
 		api.DELETE("/remove-student")
 
 	}
+
+	return r
 }

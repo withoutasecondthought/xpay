@@ -1,5 +1,5 @@
-DROP TABLE teachers;
+DROP TABLE transactions;
 
 DROP TABLE students;
 
-DROP TABLE transactions;
+DROP TABLE teachers;

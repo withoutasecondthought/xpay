@@ -1,23 +1,25 @@
 package repository
 
-import "github.com/jmoiron/sqlx"
+import (
+	"github.com/jmoiron/sqlx"
+	"xpay"
+)
 
-type AuthPostgres interface {
-
+type Auth interface {
+	SignIn(teacher xpay.Teacher) (int, error)
+	SignUp(teacher xpay.Teacher) (int, error)
 }
 
-type StudentPostgres interface {
-
+type Student interface {
 }
 
 type Repository struct {
-	AuthPostgres
-	StudentPostgres
+	Auth
+	Student
 }
 
 func NewRepository(db *sqlx.DB) *Repository {
 	return &Repository{
-		AuthPostgres:,
-		StudentPostgres:,
+		Auth: NewAuthPostgres(db),
 	}
 }
