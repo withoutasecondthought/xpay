@@ -6,6 +6,10 @@ func (h *Handler) getStudents(c *gin.Context) {
 
 }
 
+func (h *Handler) getStudent(c *gin.Context) {
+
+}
+
 func (h *Handler) newStudent(c *gin.Context) {
 
 }

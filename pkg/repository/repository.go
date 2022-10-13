@@ -5,6 +5,12 @@ import (
 	"xpay"
 )
 
+const (
+	teachers     = "teachers"
+	students     = "students"
+	transactions = "transactions"
+)
+
 type Auth interface {
 	SignIn(teacher xpay.Teacher) (int, error)
 	SignUp(teacher xpay.Teacher) (int, error)

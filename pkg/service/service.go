@@ -1,8 +1,13 @@
 package service
 
-import "xpay/pkg/repository"
+import (
+	"xpay"
+	"xpay/pkg/repository"
+)
 
 type Auth interface {
+	SignIn(teacher xpay.Teacher) (int, error)
+	SignUp(teacher xpay.Teacher) (int, error)
 }
 
 type Student interface {

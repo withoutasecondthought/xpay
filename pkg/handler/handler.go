@@ -18,19 +18,19 @@ func NewHandler(s *service.Service) *Handler {
 func (h *Handler) InitRoutes() *gin.Engine {
 	r := gin.Default()
 
-	auth := r.Group("/auth")
+	auth := r.Group("/")
 	{
-		auth.POST("/sign-in")
-		auth.POST("/sign-up")
+		auth.POST("/sign-in", h.signIn)
+		auth.POST("/sign-up", h.signUp)
 	}
 	api := r.Group("/api")
 	{
-		api.GET("/students")
-		api.GET("/student")
+		api.GET("/students", h.getStudents)
+		api.GET("/student", h.getStudent)
 
-		api.POST("/new-student")
-		api.PUT("/transaction")
-		api.DELETE("/remove-student")
+		api.POST("/new-student", h.newStudent)
+		api.PUT("/transaction", h.transaction)
+		api.DELETE("/remove-student", h.removeStudent)
 
 	}
 
