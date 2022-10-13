@@ -6,8 +6,8 @@ import (
 )
 
 type Auth interface {
-	SignIn(teacher xpay.Teacher) (int, error)
-	SignUp(teacher xpay.Teacher) (int, error)
+	SignIn(teacher xpay.Teacher) (string, error)
+	SignUp(teacher xpay.Teacher) (string, error)
 }
 
 type Student interface {
