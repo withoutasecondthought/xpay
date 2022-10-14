@@ -11,6 +11,10 @@ type Auth interface {
 }
 
 type Student interface {
+	GetStudent(student xpay.Student) (xpay.Student, error)
+	GetStudents(teacherId int) ([]*Student, error)
+	NewStudent(student xpay.Student) error
+	DeleteStudent(student xpay.Student) error
 }
 
 type Service struct {

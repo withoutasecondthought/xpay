@@ -20,14 +20,13 @@ func (h *Handler) InitRoutes() *gin.Engine {
 
 	r.POST("/sign-in", h.signIn)
 	r.POST("/sign-up", h.signUp)
+	r.GET("/student", h.getStudent)
 
 	api := r.Group("/api", h.parseJWT)
 	{
 		api.GET("/students", h.getStudents)
-		api.GET("/student", h.getStudent)
-
 		api.POST("/new-student", h.newStudent)
-		api.PUT("/transaction", h.transaction)
+		api.POST("/transaction", h.transaction)
 		api.DELETE("/remove-student", h.removeStudent)
 
 	}
