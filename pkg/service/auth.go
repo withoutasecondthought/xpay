@@ -19,7 +19,7 @@ type AuthService struct {
 
 type CustomJWTClaims struct {
 	Id int `json:"id"`
-	jwt.RegisteredClaims
+	jwt.StandardClaims
 }
 
 func (a *AuthService) SignIn(teacher xpay.Teacher) (string, error) {
@@ -53,8 +53,8 @@ func (a *AuthService) SignUp(teacher xpay.Teacher) (string, error) {
 func NewJWT(id int) (string, error) {
 	var claims = CustomJWTClaims{
 		id,
-		jwt.RegisteredClaims{
-			IssuedAt: jwt.NewNumericDate(time.Now()),
+		jwt.StandardClaims{
+			IssuedAt: time.Now().Unix(),
 		},
 	}
 
