@@ -21,7 +21,7 @@ func (h *Handler) InitRoutes() *gin.Engine {
 	r.POST("/sign-in", h.signIn)
 	r.POST("/sign-up", h.signUp)
 
-	r.GET("/student", h.getStudent)
+	r.GET("/student/:id", h.getStudent)
 
 	api := r.Group("/api", h.parseJWT)
 	{
