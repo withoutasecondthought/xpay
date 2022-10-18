@@ -11,6 +11,11 @@ type Auth interface {
 }
 
 type Student interface {
+	GetStudent(studentId int) (xpay.Student, error)
+	GetStudents(teacherId int) ([]*xpay.Student, error)
+	NewStudent(student xpay.Student) error
+	Transaction(transaction xpay.Transaction) error
+	DeleteStudent(student xpay.Student) error
 }
 
 type Service struct {
@@ -20,6 +25,7 @@ type Service struct {
 
 func NewService(repo *repository.Repository) *Service {
 	return &Service{
-		Auth: NewAuthService(repo.Auth),
+		Auth:    NewAuthService(repo.Auth),
+		Student: NewStudentService(repo.Student),
 	}
 }

@@ -17,6 +17,11 @@ type Auth interface {
 }
 
 type Student interface {
+	GetStudent(studentId int) (xpay.Student, error)
+	GetStudents(teacherId int) ([]*xpay.Student, error)
+	NewStudent(student xpay.Student) error
+	Transaction(transaction xpay.Transaction) error
+	DeleteStudent(student xpay.Student) error
 }
 
 type Repository struct {
@@ -26,6 +31,7 @@ type Repository struct {
 
 func NewRepository(db *sqlx.DB) *Repository {
 	return &Repository{
-		Auth: NewAuthPostgres(db),
+		Auth:    NewAuthPostgres(db),
+		Student: NewStudentPostgres(db),
 	}
 }

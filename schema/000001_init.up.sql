@@ -15,6 +15,7 @@ CREATE TABLE students
 CREATE TABLE transactions
 (
     id serial not null unique,
+    teacher_id int references teachers(id) not null,
     student_id int references students(id) on delete cascade not null,
     sum int not null
 );
