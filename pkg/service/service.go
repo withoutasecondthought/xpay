@@ -12,7 +12,7 @@ type Auth interface {
 
 type Student interface {
 	GetStudent(studentId int) (xpay.Student, error)
-	GetStudents(teacherId int) ([]*xpay.Student, error)
+	GetStudents(teacherId int) ([]xpay.Student, error)
 	NewStudent(student xpay.Student) error
 	Transaction(transaction xpay.Transaction) error
 	DeleteStudent(student xpay.Student) error

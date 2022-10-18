@@ -13,7 +13,7 @@ func (s *StudentService) GetStudent(studentId int) (xpay.Student, error) {
 	return s.repos.GetStudent(studentId)
 }
 
-func (s *StudentService) GetStudents(teacherId int) ([]*xpay.Student, error) {
+func (s *StudentService) GetStudents(teacherId int) ([]xpay.Student, error) {
 	return s.repos.GetStudents(teacherId)
 
 }

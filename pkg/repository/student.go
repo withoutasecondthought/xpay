@@ -13,10 +13,14 @@ type StudentPostgres struct {
 func (s *StudentPostgres) GetStudent(studentId int) (xpay.Student, error) {
 	var student xpay.Student
 
-	query := fmt.Sprintf(`SELECT (%s.id, %s.name, %s.teacher_id, SUM(%s.sum)) FROM %s INNER JOIN %s ON %s.id = $1`,
-		students, students, students, transactions, students, transactions, students)
+	query := fmt.Sprintf(`SELECT %s.id, %s.name, %s.teacher_id, SUM(%s.sum)
+								FROM %s
+								LEFT JOIN %s
+								ON %s.id = $1
+								GROUP BY %s.name, %s.id, %s.teacher_id`,
+		students, students, students, transactions, students, transactions, students, students, students, students)
 
-	err := s.db.QueryRow(query, studentId).Scan(&student)
+	err := s.db.Get(&student, query, studentId)
 	if err != nil {
 		return xpay.Student{}, err
 	}
@@ -24,11 +28,15 @@ func (s *StudentPostgres) GetStudent(studentId int) (xpay.Student, error) {
 	return student, nil
 }
 
-func (s *StudentPostgres) GetStudents(teacherId int) ([]*xpay.Student, error) {
-	var studentsArr []*xpay.Student
+func (s *StudentPostgres) GetStudents(teacherId int) ([]xpay.Student, error) {
+	var studentsArr []xpay.Student
 
-	query := fmt.Sprintf(`SELECT (%s.id, %s.name, %s.teacher_id, SUM(%s.sum)) FROM %s INNER JOIN %s ON teacher_id = $1`,
-		students, students, students, transactions, students, transactions)
+	query := fmt.Sprintf(`SELECT %s.id, %s.name, %s.teacher_id, SUM(%s.sum)
+								FROM %s 
+								INNER JOIN %s 
+								ON %s.teacher_id = $1 
+								GROUP BY %s.id, %s.name, %s.teacher_id`,
+		students, students, students, transactions, students, transactions, students, students, students, students)
 
 	err := s.db.Select(&studentsArr, query, teacherId)
 	if err != nil {
@@ -61,9 +69,9 @@ func (s *StudentPostgres) Transaction(transaction xpay.Transaction) error {
 }
 
 func (s *StudentPostgres) DeleteStudent(student xpay.Student) error {
-	query := fmt.Sprintf(`DELETE FROM %s WHERE teacher_id=$1 AND student_id=$2`, students)
+	query := fmt.Sprintf(`DELETE FROM %s WHERE teacher_id=$1 AND id=$2`, students)
 
-	err := s.db.QueryRow(query, student.TeacherId, student.Name).Err()
+	err := s.db.QueryRow(query, student.TeacherId, student.Id).Err()
 	if err != nil {
 		return err
 	}

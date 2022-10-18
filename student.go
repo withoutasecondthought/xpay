@@ -1,8 +1,8 @@
 package xpay
 
 type Student struct {
-	Id        int    `json:"id,omitempty"`
-	Name      string `json:"name" binding:"required"`
-	TeacherId int    `json:"-"`
-	Money     int    `json:"money"`
+	Id        int    `json:"id,omitempty" db:"id"`
+	Name      string `json:"name" binding:"required" db:"name"`
+	TeacherId int    `json:"-" db:"teacher_id"`
+	Money     int    `json:"money" db:"sum"`
 }
